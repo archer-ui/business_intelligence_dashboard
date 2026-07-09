@@ -1,4 +1,4 @@
-# Dataset Acquisition
+## Dataset Acquisition
 The dataset used for this project was the Sample Superstore dataset, a publicly available retail sales dataset commonly used for business intelligence, data analytics, and visualization projects. It was obtained from the Tableau Sample Data repository, which provides datasets specifically designed for learning and demonstrating data analysis techniques.
 The dataset contains transactional records of a retail company, including information on customer orders, product categories, sales, profits, discounts, quantities, shipping details, and geographical regions. These variables make the dataset suitable for analyzing business performance and creating meaningful visualizations.
 The Sample Superstore dataset was selected because it is well-structured, contains minimal data quality issues, and includes both numerical and categorical variables required for descriptive statistical analysis and dashboard development. It also provides sufficient records to identify trends, compare business performance across regions and product categories, and evaluate key performance indicators such as total sales and profit.
