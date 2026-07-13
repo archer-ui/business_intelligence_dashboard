@@ -43,12 +43,12 @@ business-intelligence-dashboard/
 4. Esther Mwangi
 5. Caleb Kyalo
 ## Dataset
-Dataset Name:
-Source:
-Number of Records:
-Number of Features:
-Business Domain:
-Key Variables:
+Dataset Name: Sample Superstore dataset
+Source: Tableau Sample Data Website
+Number of Records: 10,000
+Number of Features: 21
+Business Domain: Retail Store
+Key Variables: Customer orders, product categories, sales, distance, quantities, geographical categories.
 ## Daily Workflow
 1. Pull the latest changes from main.
 2. Create a feature branch.
