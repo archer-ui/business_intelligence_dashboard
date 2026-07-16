@@ -74,8 +74,8 @@ Key Variables: Customer orders, product categories, sales, distance, quantities,
 ## Milestones
 | Milestone | Objective                                   | Status  |
 | --------- | ------------------------------------------- | ------- |
-| 1         | Data Representation & Foundations           | ⏳      |
-| 2         | Data Processing & Transformation            | ⏳      |
+| 1         | Data Representation & Foundations           | COMPLETED |
+| 2         | Data Processing & Transformation            | COMPLETED |
 | 3         | Visualization & Exploratory Analysis        | ⏳      |
 | 4         | Statistical Inference & Analytical Modeling | ⏳      |
 | 5         | Interactive Visual Analytics System         | ⏳      |
