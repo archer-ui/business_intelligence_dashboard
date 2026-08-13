@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 
-
 # ============================================================
 # PAGE CONFIGURATION
 # ============================================================
@@ -14,68 +13,53 @@ st.set_page_config(
     layout="wide"
 )
 
-
 # ============================================================
 # LOAD PROCESSED DATASET
 # ============================================================
 
-DATA_FOLDER = Path("Data")
+data_file = Path("Data") / "sampledata_processed.csv"
 
-processed_files = list(DATA_FOLDER.glob("processed*"))
-
-if not processed_files:
-    st.error(
-        "Processed dataset not found. Make sure your processed dataset "
-        "is inside the Data folder and its name starts with 'processed'."
-    )
+if not data_file.exists():
+    st.error(f"Dataset not found: {data_file}")
     st.stop()
 
-data_file = processed_files[0]
-
-if data_file.suffix.lower() in [".xlsx", ".xls"]:
-    df = pd.read_excel(data_file)
-elif data_file.suffix.lower() == ".csv":
-    df = pd.read_csv(data_file)
-else:
-    st.error("The processed dataset must be an Excel or CSV file.")
-    st.stop()
-
+df = pd.read_csv(data_file)
 
 # ============================================================
 # DATA PREPARATION
 # ============================================================
 
-# Convert Order Date to datetime
 if "Order Date" in df.columns:
     df["Order Date"] = pd.to_datetime(
         df["Order Date"],
         errors="coerce"
     )
 
-# Create Profit Margin if it does not already exist
+# Use existing Profit Margin Percentage from Milestone 3
+# or create it if necessary.
 if "Profit Margin Percentage" not in df.columns:
     df["Profit Margin Percentage"] = (
         df["Profit"] / df["Sales"] * 100
-    ).replace([float("inf"), -float("inf")], 0).fillna(0)
-
+    ).replace(
+        [float("inf"), -float("inf")],
+        0
+    ).fillna(0)
 
 # ============================================================
-# TITLE
+# DASHBOARD TITLE
 # ============================================================
 
 st.title("Business Intelligence Dashboard")
-st.markdown(
-    "### Interactive Visual Analytics System"
-)
+
+st.markdown("### Interactive Visual Analytics System")
 
 st.markdown(
     "This dashboard integrates the data preparation, "
     "feature engineering and visual analysis developed "
-    "through the previous milestones."
+    "through Milestones 1–4."
 )
 
 st.divider()
-
 
 # ============================================================
 # SIDEBAR FILTERS
@@ -83,22 +67,23 @@ st.divider()
 
 st.sidebar.header("Dashboard Filters")
 
-# Region filter
-regions = ["All"] + sorted(df["Region"].dropna().unique().tolist())
+regions = ["All"] + sorted(
+    df["Region"].dropna().unique().tolist()
+)
 
 selected_region = st.sidebar.selectbox(
     "Select Region",
     regions
 )
 
-# Category filter
-categories = ["All"] + sorted(df["Category"].dropna().unique().tolist())
+categories = ["All"] + sorted(
+    df["Category"].dropna().unique().tolist()
+)
 
 selected_category = st.sidebar.selectbox(
     "Select Category",
     categories
 )
-
 
 # ============================================================
 # APPLY FILTERS
@@ -116,7 +101,6 @@ if selected_category != "All":
         filtered_df["Category"] == selected_category
     ]
 
-
 # ============================================================
 # KPI CALCULATIONS
 # ============================================================
@@ -125,16 +109,14 @@ total_sales = filtered_df["Sales"].sum()
 
 total_profit = filtered_df["Profit"].sum()
 
-total_orders = (
-    filtered_df["Order ID"].nunique()
-    if "Order ID" in filtered_df.columns
-    else len(filtered_df)
-)
+if "Order ID" in filtered_df.columns:
+    total_orders = filtered_df["Order ID"].nunique()
+else:
+    total_orders = len(filtered_df)
 
 average_profit_margin = filtered_df[
     "Profit Margin Percentage"
 ].mean()
-
 
 # ============================================================
 # KPI DISPLAY
@@ -164,13 +146,11 @@ with col3:
 
 with col4:
     st.metric(
-        "Avg. Profit Margin",
+        "Average Profit Margin",
         f"{average_profit_margin:.2f}%"
     )
 
-
 st.divider()
-
 
 # ============================================================
 # SALES BY CATEGORY
@@ -202,7 +182,6 @@ st.plotly_chart(
     use_container_width=True
 )
 
-
 # ============================================================
 # SALES BY REGION
 # ============================================================
@@ -232,7 +211,6 @@ st.plotly_chart(
     fig_region,
     use_container_width=True
 )
-
 
 # ============================================================
 # PROFIT BY CATEGORY
@@ -264,9 +242,8 @@ st.plotly_chart(
     use_container_width=True
 )
 
-
 # ============================================================
-# SALES TREND OVER TIME
+# SALES TREND
 # ============================================================
 
 if "Order Date" in filtered_df.columns:
@@ -296,7 +273,6 @@ if "Order Date" in filtered_df.columns:
         fig_time,
         use_container_width=True
     )
-
 
 # ============================================================
 # SALES CATEGORY ANALYSIS
@@ -328,7 +304,6 @@ if "Sales Category" in filtered_df.columns:
         fig_sales_class,
         use_container_width=True
     )
-
 
 # ============================================================
 # DECISION SUPPORT
@@ -375,13 +350,12 @@ if not filtered_df.empty:
     )
 
     st.write(
-        "These indicators can support decisions concerning "
+        "These indicators support decisions concerning "
         "resource allocation, product strategy and regional performance."
     )
 
-
 # ============================================================
-# DATA PREVIEW
+# FILTERED DATA
 # ============================================================
 
 st.divider()
@@ -393,6 +367,4 @@ with st.expander("View Filtered Dataset"):
         use_container_width=True
     )
 
-st.caption(
-    "Business Intelligence Dashboard — Milestone 5"
-)
+st.caption("Business Intelligence Dashboard — Milestone 5")
