@@ -17,7 +17,7 @@ st.set_page_config(
 # LOAD PROCESSED DATASET
 # ============================================================
 
-data_file = Path("Data") / "sampledata_processed.csv"
+data_file = Path(__file__).resolve().parents[2] / "Data" / "sampledata_processed.csv"
 
 if not data_file.exists():
     st.error(f"Dataset not found: {data_file}")
