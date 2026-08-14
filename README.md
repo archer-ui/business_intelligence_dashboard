@@ -15,7 +15,7 @@ The project uses the Sample Superstore dataset to progress from data preparation
 | M3 | Visualization & Exploratory Analysis | COMPLETED |
 | M4 | Statistical Inference & Analytical Modeling | COMPLETED |
 | M5 | Interactive Visual Analytics System | COMPLETED |
-| M6 | Research Contribution & Advanced Analytics | IN PROGRESS |
+| M6 | Research Contribution & Advanced Analytics | COMPLETED |
 
 ---
 
