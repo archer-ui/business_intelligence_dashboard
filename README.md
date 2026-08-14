@@ -78,8 +78,8 @@ Key Variables: Customer orders, product categories, sales, distance, quantities,
 | 2         | Data Processing & Transformation            | COMPLETED |
 | 3         | Visualization & Exploratory Analysis        | COMPLETED     |
 | 4         | Statistical Inference & Analytical Modeling | COMPLETED      |
-| 5         | Interactive Visual Analytics System         | ⏳      |
-| 6         | Research Contribution & Advanced Analytics  | ⏳      |
+| 5         | Interactive Visual Analytics System         | COMPLETED      |
+| 6         | Research Contribution & Advanced Analytics  | COMPLETED      |
 
 ## Milestone 2 Achievements
 
